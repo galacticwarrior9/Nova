@@ -38,7 +38,7 @@ abstract class VanillaTileEntity(tileState: TileState) : DataHolder(tileState.ge
     abstract fun handleInitialized()
     
     fun updateDataContainer() {
-        val tileState = block.state
+        val tileState = block.getState(false)
         if (tileState is TileState) {
             tileState.persistentDataContainer.set(TILE_ENTITY_KEY, CompoundElementDataType, data)
             tileState.update()
@@ -109,7 +109,7 @@ class VanillaChestTileEntity(chest: Chest) : ItemStorageVanillaTileEntity(chest)
     override fun handleInitialized() = Unit
     
     private fun setInventories() {
-        val chest = block.state
+        val chest = block.getState(false)
         if (chest is Chest) {
             val inventory = NetworkedChestInventory(chest.inventory)
             inventories = CUBE_FACES.associateWithTo(EnumMap(BlockFace::class.java)) { inventory }
@@ -118,13 +118,13 @@ class VanillaChestTileEntity(chest: Chest) : ItemStorageVanillaTileEntity(chest)
     }
     
     private fun getOtherChestLocation(): Location? {
-        val chest = block.state
+        val chest = block.getState(false)
         if (chest is Chest) {
-            val holder = chest.inventory.holder
+            val holder = chest.inventory.getHolder(false)
             
             if (holder is DoubleChest) {
-                val left = holder.leftSide as Chest
-                val right = holder.rightSide as Chest
+                val left = holder.getLeftSide(false) as Chest
+                val right = holder.getRightSide(false) as Chest
                 
                 return if (left.location == location) right.location else left.location
             }

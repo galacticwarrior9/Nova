@@ -155,7 +155,7 @@ object VanillaTileEntityManager : Initializable(), Listener {
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun handlePlace(event: BlockPlaceEvent) {
         val block = event.block
-        val state = block.state
+        val state = block.getState(false)
         
         val tileEntity = createVanillaTileEntity(state)
         if (tileEntity != null) {

@@ -207,6 +207,13 @@
             <version>${fuzzywuzzy.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- CCNet: Use Paper -->
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.18.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Provided through plugins -->
         <dependency>
@@ -303,10 +310,6 @@
                 <exclusion>
                     <groupId>org.bstats</groupId>
                     <artifactId>bstats-bukkit</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.papermc</groupId>
-                    <artifactId>paperlib</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.enginehub</groupId>
