@@ -61,10 +61,10 @@ fun Block.getAllDrops(tool: ItemStack? = null): List<ItemStack> {
     val drops = ArrayList<ItemStack>()
     val state = state
     if (state is Chest) {
-        drops += state.blockInventory.contents.filterNotNull()
+        drops += state.blockInventory.contents?.filterNotNull() ?: mutableListOf()
         state.blockInventory.clear()
     } else if (state is Container && state !is ShulkerBox) {
-        drops += state.inventory.contents.filterNotNull()
+        drops += state.inventory.contents?.filterNotNull() ?: mutableListOf()
         state.inventory.clear()
     }
     

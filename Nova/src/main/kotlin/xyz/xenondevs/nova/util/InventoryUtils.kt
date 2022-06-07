@@ -66,7 +66,8 @@ fun Inventory.addItemCorrectly(itemStack: ItemStack): Int {
  */
 fun Inventory.getFirstPartialStack(type: ItemStack): ItemStack? {
     val maxStackSize = type.type.maxStackSize
-    for (item in storageContents) {
+    for (item in storageContents ?: return null) {
+        if (item == null) continue
         if (type.isSimilar(item)) {
             val amount = item.amount
             if (amount < item.type.maxStackSize && amount < maxStackSize)
@@ -82,7 +83,7 @@ fun Inventory.getFirstPartialStack(type: ItemStack): ItemStack? {
  * that is completely empty.
  */
 fun Inventory.getFirstEmptySlot(): Int? {
-    for ((slot, item) in storageContents.withIndex()) {
+    for ((slot, item) in storageContents?.withIndex() ?: return null) {
         if (item == null) return slot
     }
     

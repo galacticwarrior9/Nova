@@ -96,7 +96,7 @@ open class NetworkedBukkitInventory(val inventory: Inventory) : NetworkedInvento
     
     override val size = inventory.size
     override val items: Array<ItemStack?>
-        get() = inventory.contents.deepClone()
+        get() = inventory.contents?.deepClone() ?: arrayOf<ItemStack?>()
     
     override fun setItem(slot: Int, item: ItemStack?) {
         inventory.setItem(slot, item)
@@ -160,7 +160,7 @@ class NetworkedRangedBukkitInventory(
     override val size = slots.size
     
     override val items: Array<ItemStack?>
-        get() = inventory.contents.takeIndices(slots).deepClone()
+        get() = inventory.contents?.takeIndices(slots)?.deepClone() ?: arrayOf()
     
     override fun setItem(slot: Int, item: ItemStack?) {
         inventory.setItem(slots[slot], item)

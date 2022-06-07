@@ -139,7 +139,7 @@ object RecipeManager : Initializable(), Listener {
         if (namespace == "nova") {
             // If this is a Nova recipe result, replace it with a NovaCraftingInventory
             ReflectionRegistry.PREPARE_ITEM_CRAFT_EVENT_MATRIX_FIELD.set(event, NovaCraftingInventory(recipe, event.inventory))
-        } else if (event.inventory.contents.any { it.novaMaterial != null }) {
+        } else if (event.inventory.contents?.any { it?.novaMaterial != null } == true) {
             // prevent non-Nova recipes from using Nova items
             event.inventory.result = ItemStack(Material.AIR)
         }
