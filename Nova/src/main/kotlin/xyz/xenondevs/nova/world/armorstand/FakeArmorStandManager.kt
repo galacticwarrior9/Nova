@@ -151,6 +151,9 @@ object FakeArmorStandManager : Initializable(), Listener {
     
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun handleMove(event: PlayerMoveEvent) {
+        if (!event.hasChangedPosition()) {
+            return
+        }
         val newChunk = event.to!!.chunkPos
         if (event.from.chunkPos != newChunk) {
             val player = event.player
